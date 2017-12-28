@@ -6,6 +6,7 @@ package jp._5000164.s_99
 object WorkingWithLists extends App {
   // Find the last element of a list.
   assert(last(List(1, 1, 2, 3, 5, 8)) == 8)
+  assert(last(List("a", "b", "c")) == "c")
 
-  def last(list: List[Int]): Int = list.last
+  def last[A](list: List[A]): A = list.last
 }
