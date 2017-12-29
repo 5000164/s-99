@@ -13,6 +13,12 @@ object WorkingWithLists extends App {
   // Find the last but one element of a list.
   assert(penultimate(List(1, 1, 2, 3, 5, 8)) == 5)
   assert(penultimate(List("a", "b", "c")) == "b")
+  assert(penultimateAlt(List(1, 1, 2, 3, 5, 8)) == 5)
+  assert(penultimateAlt(List("a", "b", "c")) == "b")
+  assert(lastNth(2, List(1, 1, 2, 3, 5, 8)) == 5)
+  assert(lastNth(2, List("a", "b", "c")) == "b")
+  assert(lastNthAlt(2, List(1, 1, 2, 3, 5, 8)) == 5)
+  assert(lastNthAlt(2, List("a", "b", "c")) == "b")
 
   def last[A](list: List[A]): A = list.last
 
@@ -22,5 +28,30 @@ object WorkingWithLists extends App {
     case _ => throw new NoSuchElementException
   }
 
-  def penultimate[A](list: List[A]): A = last(list.init)
+  def penultimate[A](list: List[A]): A =
+    if (list.isEmpty) throw new NoSuchElementException
+    else list.init.last
+
+  def penultimateAlt[A](list: List[A]): A = list match {
+    case h :: _ :: Nil => h
+    case _ :: tail => penultimateAlt(tail)
+    case _ => throw new NoSuchElementException
+  }
+
+  def lastNth[A](n: Int, list: List[A]): A = {
+    if (n <= 0) throw new IllegalArgumentException
+    if (list.lengthCompare(n) < 0) throw new NoSuchElementException
+    list.takeRight(n).head
+  }
+
+  def lastNthAlt[A](n: Int, list: List[A]): A = {
+    def lastNthR(count: Int, resultList: List[A], curList: List[A]): A = curList match {
+      case Nil if count > 0 => throw new NoSuchElementException
+      case Nil => resultList.head
+      case _ :: tail => lastNthR(count - 1, if (count > 0) resultList else resultList.tail, tail)
+    }
+
+    if (n <= 0) throw new IllegalArgumentException
+    else lastNthR(n, list, list)
+  }
 }
