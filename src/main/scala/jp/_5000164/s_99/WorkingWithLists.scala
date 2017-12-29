@@ -10,6 +10,10 @@ object WorkingWithLists extends App {
   assert(lastAlt(List(1, 1, 2, 3, 5, 8)) == 8)
   assert(lastAlt(List("a", "b", "c")) == "c")
 
+  // Find the last but one element of a list.
+  assert(penultimate(List(1, 1, 2, 3, 5, 8)) == 5)
+  assert(penultimate(List("a", "b", "c")) == "b")
+
   def last[A](list: List[A]): A = list.last
 
   def lastAlt[A](list: List[A]): A = list match {
@@ -17,4 +21,6 @@ object WorkingWithLists extends App {
     case _ :: tail => lastAlt(tail)
     case _ => throw new NoSuchElementException
   }
+
+  def penultimate[A](list: List[A]): A = last(list.init)
 }
