@@ -20,6 +20,10 @@ object WorkingWithLists extends App {
   assert(lastNthAlt(2, List(1, 1, 2, 3, 5, 8)) == 5)
   assert(lastNthAlt(2, List("a", "b", "c")) == "b")
 
+  // Find the Kth element of a list.
+  assert(nth(2, List(1, 1, 2, 3, 5, 8)) == 2)
+  assert(nth(2, List("a", "b", "c")) == "c")
+
   def last[A](list: List[A]): A = list.last
 
   def lastAlt[A](list: List[A]): A = list match {
@@ -53,5 +57,11 @@ object WorkingWithLists extends App {
 
     if (n <= 0) throw new IllegalArgumentException
     else lastNthR(n, list, list)
+  }
+
+  def nth[A](n: Int, list: List[A]): A = {
+    if (n < 0) throw new IllegalArgumentException
+    if (list.lengthCompare(n + 1) < 0) throw new NoSuchElementException
+    list.take(n + 1).last
   }
 }
