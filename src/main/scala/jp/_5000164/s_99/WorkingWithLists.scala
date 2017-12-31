@@ -70,4 +70,10 @@ object WorkingWithLists extends App {
     case (i, _ :: tail) => nthAlt(i - 1, tail)
     case (_, Nil) => throw new NoSuchElementException
   }
+
+  // Find the number of elements of a list.
+  assert(length(List(1, 1, 2, 3, 5, 8)) == 6)
+  assert(length(List("a", "b", "c")) == 3)
+
+  def length[A](list: List[A]): Int = list.length
 }
