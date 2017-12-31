@@ -74,6 +74,28 @@ object WorkingWithLists extends App {
   // Find the number of elements of a list.
   assert(length(List(1, 1, 2, 3, 5, 8)) == 6)
   assert(length(List("a", "b", "c")) == 3)
+  assert(lengthAlt(List(1, 1, 2, 3, 5, 8)) == 6)
+  assert(lengthAlt(List("a", "b", "c")) == 3)
+  assert(lengthAltTail(List(1, 1, 2, 3, 5, 8)) == 6)
+  assert(lengthAltTail(List("a", "b", "c")) == 3)
+  assert(lengthAltFunctional(List(1, 1, 2, 3, 5, 8)) == 6)
+  assert(lengthAltFunctional(List("a", "b", "c")) == 3)
 
   def length[A](list: List[A]): Int = list.length
+
+  def lengthAlt[A](list: List[A]): Int = list match {
+    case Nil => 0
+    case _ :: tail => 1 + lengthAlt(tail)
+  }
+
+  def lengthAltTail[A](list: List[A]): Int = {
+    def lengthR[B](result: Int, curList: List[B]): Int = curList match {
+      case Nil => result
+      case _ :: tail => lengthR(result + 1, tail)
+    }
+
+    lengthR(0, list)
+  }
+
+  def lengthAltFunctional[A](list: List[A]): Int = list.foldLeft(0) { (c, _) => c + 1 }
 }
