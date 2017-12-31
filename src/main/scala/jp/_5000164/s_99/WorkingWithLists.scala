@@ -10,6 +10,14 @@ object WorkingWithLists extends App {
   assert(lastAlt(List(1, 1, 2, 3, 5, 8)) == 8)
   assert(lastAlt(List("a", "b", "c")) == "c")
 
+  def last[A](list: List[A]): A = list.last
+
+  def lastAlt[A](list: List[A]): A = list match {
+    case h :: Nil => h
+    case _ :: tail => lastAlt(tail)
+    case _ => throw new NoSuchElementException
+  }
+
   // Find the last but one element of a list.
   assert(penultimate(List(1, 1, 2, 3, 5, 8)) == 5)
   assert(penultimate(List("a", "b", "c")) == "b")
@@ -19,20 +27,6 @@ object WorkingWithLists extends App {
   assert(lastNth(2, List("a", "b", "c")) == "b")
   assert(lastNthAlt(2, List(1, 1, 2, 3, 5, 8)) == 5)
   assert(lastNthAlt(2, List("a", "b", "c")) == "b")
-
-  // Find the Kth element of a list.
-  assert(nth(2, List(1, 1, 2, 3, 5, 8)) == 2)
-  assert(nth(2, List("a", "b", "c")) == "c")
-  assert(nthAlt(2, List(1, 1, 2, 3, 5, 8)) == 2)
-  assert(nthAlt(2, List("a", "b", "c")) == "c")
-
-  def last[A](list: List[A]): A = list.last
-
-  def lastAlt[A](list: List[A]): A = list match {
-    case h :: Nil => h
-    case _ :: tail => lastAlt(tail)
-    case _ => throw new NoSuchElementException
-  }
 
   def penultimate[A](list: List[A]): A =
     if (list.isEmpty) throw new NoSuchElementException
@@ -60,6 +54,12 @@ object WorkingWithLists extends App {
     if (n <= 0) throw new IllegalArgumentException
     else lastNthR(n, list, list)
   }
+
+  // Find the Kth element of a list.
+  assert(nth(2, List(1, 1, 2, 3, 5, 8)) == 2)
+  assert(nth(2, List("a", "b", "c")) == "c")
+  assert(nthAlt(2, List(1, 1, 2, 3, 5, 8)) == 2)
+  assert(nthAlt(2, List("a", "b", "c")) == "c")
 
   def nth[A](n: Int, list: List[A]): A =
     if (n >= 0) list(n)
