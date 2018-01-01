@@ -102,6 +102,28 @@ object WorkingWithLists extends App {
   // Reverse a list.
   assert(reverse(List(1, 1, 2, 3, 5, 8)) == List(8, 5, 3, 2, 1, 1))
   assert(reverse(List("a", "b", "c")) == List("c", "b", "a"))
+  assert(reverseAlt(List(1, 1, 2, 3, 5, 8)) == List(8, 5, 3, 2, 1, 1))
+  assert(reverseAlt(List("a", "b", "c")) == List("c", "b", "a"))
+  assert(reverseAltTail(List(1, 1, 2, 3, 5, 8)) == List(8, 5, 3, 2, 1, 1))
+  assert(reverseAltTail(List("a", "b", "c")) == List("c", "b", "a"))
+  assert(reverseAltFunctional(List(1, 1, 2, 3, 5, 8)) == List(8, 5, 3, 2, 1, 1))
+  assert(reverseAltFunctional(List("a", "b", "c")) == List("c", "b", "a"))
 
   def reverse[A](list: List[A]): List[A] = list.reverse
+
+  def reverseAlt[A](list: List[A]): List[A] = list match {
+    case Nil => Nil
+    case h :: tail => reverseAlt(tail) ::: List(h)
+  }
+
+  def reverseAltTail[A](list: List[A]): List[A] = {
+    def reverseR[B](result: List[B], curList: List[B]): List[B] = curList match {
+      case Nil => result
+      case h :: tail => reverseR(h :: result, tail)
+    }
+
+    reverseR(Nil, list)
+  }
+
+  def reverseAltFunctional[A](list: List[A]): List[A] = list.foldLeft(List[A]()) { (r, h) => h :: r }
 }
