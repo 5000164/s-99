@@ -98,4 +98,10 @@ object WorkingWithLists extends App {
   }
 
   def lengthAltFunctional[A](list: List[A]): Int = list.foldLeft(0) { (c, _) => c + 1 }
+
+  // Reverse a list.
+  assert(reverse(List(1, 1, 2, 3, 5, 8)) == List(8, 5, 3, 2, 1, 1))
+  assert(reverse(List("a", "b", "c")) == List("c", "b", "a"))
+
+  def reverse[A](list: List[A]): List[A] = list.reverse
 }
