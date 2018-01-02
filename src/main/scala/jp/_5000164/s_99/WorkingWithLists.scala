@@ -126,4 +126,16 @@ object WorkingWithLists extends App {
   }
 
   def reverseAltFunctional[A](list: List[A]): List[A] = list.foldLeft(List[A]()) { (r, h) => h :: r }
+
+  // Find out whether a list is a palindrome.
+  assert(isPalindrome(List(1, 2, 3, 2, 1)))
+  assert(isPalindrome(List("a", "b", "a")))
+  assert(!isPalindrome(List(1, 2, 3)))
+
+  def isPalindrome[A](list: List[A]): Boolean = {
+    val getLength: Int = list.size / 2
+    val firstHalf = list.take(getLength)
+    val latterHalf = list.takeRight(getLength)
+    firstHalf == latterHalf.reverse
+  }
 }
