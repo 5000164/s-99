@@ -132,10 +132,5 @@ object WorkingWithLists extends App {
   assert(isPalindrome(List("a", "b", "a")))
   assert(!isPalindrome(List(1, 2, 3)))
 
-  def isPalindrome[A](list: List[A]): Boolean = {
-    val getLength: Int = list.size / 2
-    val firstHalf = list.take(getLength)
-    val latterHalf = list.takeRight(getLength)
-    firstHalf == latterHalf.reverse
-  }
+  def isPalindrome[A](list: List[A]): Boolean = list == list.reverse
 }
