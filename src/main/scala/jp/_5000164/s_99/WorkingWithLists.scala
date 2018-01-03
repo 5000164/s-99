@@ -133,4 +133,13 @@ object WorkingWithLists extends App {
   assert(!isPalindrome(List(1, 2, 3)))
 
   def isPalindrome[A](list: List[A]): Boolean = list == list.reverse
+
+  // Flatten a nested list structure.
+  assert(flatten(List(List(1, 1), 2, List(3, List(5, 8)))) == List(1, 1, 2, 3, 5, 8))
+  assert(flatten(List(List(List("a"), "b"), List("c"))) == List("a", "b", "c"))
+
+  def flatten(list: List[Any]): List[Any] = list flatMap {
+    case ms: List[_] => flatten(ms)
+    case e => List(e)
+  }
 }
