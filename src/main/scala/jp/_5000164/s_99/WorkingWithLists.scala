@@ -4,7 +4,7 @@ package jp._5000164.s_99
   * http://aperiodic.net/phil/scala/s-99/
   */
 object WorkingWithLists extends App {
-  // Find the last element of a list.
+  // P01: Find the last element of a list.
   assert(last(List(1, 1, 2, 3, 5, 8)) == 8)
   assert(last(List("a", "b", "c")) == "c")
   assert(lastAlt(List(1, 1, 2, 3, 5, 8)) == 8)
@@ -18,7 +18,7 @@ object WorkingWithLists extends App {
     case _ => throw new NoSuchElementException
   }
 
-  // Find the last but one element of a list.
+  // P02: Find the last but one element of a list.
   assert(penultimate(List(1, 1, 2, 3, 5, 8)) == 5)
   assert(penultimate(List("a", "b", "c")) == "b")
   assert(penultimateAlt(List(1, 1, 2, 3, 5, 8)) == 5)
@@ -55,7 +55,7 @@ object WorkingWithLists extends App {
     else lastNthR(n, list, list)
   }
 
-  // Find the Kth element of a list.
+  // P03: Find the Kth element of a list.
   assert(nth(2, List(1, 1, 2, 3, 5, 8)) == 2)
   assert(nth(2, List("a", "b", "c")) == "c")
   assert(nthAlt(2, List(1, 1, 2, 3, 5, 8)) == 2)
@@ -71,7 +71,7 @@ object WorkingWithLists extends App {
     case (_, Nil) => throw new NoSuchElementException
   }
 
-  // Find the number of elements of a list.
+  // P04: Find the number of elements of a list.
   assert(length(List(1, 1, 2, 3, 5, 8)) == 6)
   assert(length(List("a", "b", "c")) == 3)
   assert(lengthAlt(List(1, 1, 2, 3, 5, 8)) == 6)
@@ -99,7 +99,7 @@ object WorkingWithLists extends App {
 
   def lengthAltFunctional[A](list: List[A]): Int = list.foldLeft(0) { (c, _) => c + 1 }
 
-  // Reverse a list.
+  // P05: Reverse a list.
   assert(reverse(List(1, 1, 2, 3, 5, 8)) == List(8, 5, 3, 2, 1, 1))
   assert(reverse(List("a", "b", "c")) == List("c", "b", "a"))
   assert(reverseAlt(List(1, 1, 2, 3, 5, 8)) == List(8, 5, 3, 2, 1, 1))
@@ -127,14 +127,14 @@ object WorkingWithLists extends App {
 
   def reverseAltFunctional[A](list: List[A]): List[A] = list.foldLeft(List[A]()) { (r, h) => h :: r }
 
-  // Find out whether a list is a palindrome.
+  // P06: Find out whether a list is a palindrome.
   assert(isPalindrome(List(1, 2, 3, 2, 1)))
   assert(isPalindrome(List("a", "b", "a")))
   assert(!isPalindrome(List(1, 2, 3)))
 
   def isPalindrome[A](list: List[A]): Boolean = list == list.reverse
 
-  // Flatten a nested list structure.
+  // P07: Flatten a nested list structure.
   assert(flatten(List(List(1, 1), 2, List(3, List(5, 8)))) == List(1, 1, 2, 3, 5, 8))
   assert(flatten(List(List(List("a"), "b"), List("c"))) == List("a", "b", "c"))
 
